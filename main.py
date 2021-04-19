@@ -1,5 +1,3 @@
-#!/bin/usr/python3
-
 import discord
 import re
 import os
