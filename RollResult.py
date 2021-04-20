@@ -71,5 +71,9 @@ class RollResult:
         chosen_from_clause = '\nchosen from:\n%s' % '\n'.join(str(tried_result) for tried_result in self.tries) if self.params.advantage is not Advantage.NONE else ""
         # builds the string used if the roll was made with (dis)advantage
         with_clause = f'\nwith {self.params.advantage.value}' if self.params.advantage is not Advantage.NONE else ""
+        # builds the critical hit clause if the roll consisted of a single d20 and the outcome was a 20
+        crit_clause = ""
+        if self.params.quantity == 1 and self.params.sides == 20 and self.die_rolls[0] == 20:
+            crit_clause = ' Critical roll!'
 
-        return "".join([die_rolls_clause, modifier_clause, total_clause, chosen_from_clause, with_clause])
+        return "".join([die_rolls_clause, modifier_clause, total_clause, chosen_from_clause, with_clause, crit_clause])
